@@ -1,5 +1,6 @@
 package com.sda;
 
+import com.sda.autowiring.Employee;
 import com.sda.config.AppConfig;
 import com.sda.service.EmailService;
 import org.springframework.beans.factory.BeanFactory;
@@ -9,6 +10,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
+
+//        SpringApplication.run(Main.class, args);
+
         System.out.println("Hello world!");
 //        EmailService emailService = new EmailService();
 //        emailService.sendEmail("Tarom", "Ieftiniti biletele!");
@@ -32,5 +36,12 @@ public class Main {
         EmailService emailService2 = applicationContext1.getBean("emailServiceBean", EmailService.class);
         System.out.println(emailService2);
         emailService2.sendEmail("Radu", "Mesaj pentru Radu.");
+
+        // Testing department and employee beans for autowiring
+        ApplicationContext applicationContext3 = new ClassPathXmlApplicationContext("beans.xml");
+        Employee employee = applicationContext3.getBean("emp", Employee.class);
+        employee.setId("14J");
+        employee.setName("Bogdan");
+        employee.employeeInfo();
     }
 }
